@@ -1,6 +1,7 @@
 # trip_cost_app.py
 
 import streamlit as st
+import pandas as pd
 
 st.title("Trip Cost Calculator")
 
@@ -27,3 +28,13 @@ st.write(f"Fuel Cost: ₹ **{fuel_cost:.2f}**")
 st.write(f"Toll Cost: ₹ **{toll_cost:.2f}**")
 st.write(f"Stay Cost: ₹ **{stay_cost:.2f}**")
 st.write(f"**Total Cost: ₹ {total_cost:.2f}**")
+
+
+# Create a summary DataFrame
+summary = pd.DataFrame({
+    'Item': ['Fuel Cost', 'Toll Cost', 'Stay Cost', 'Total Cost'],
+    'Amount (₹)': [fuel_cost, toll_cost, stay_cost, total_cost]
+})
+
+# Export to Excel
+st.download_button("Download as Excel", summary.to_csv(index=False), "trip_cost_summary.csv")
