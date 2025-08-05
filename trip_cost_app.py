@@ -2,23 +2,37 @@
 
 import streamlit as st
 import pandas as pd
+import math
 
 st.title("Trip Cost Calculator")
 
 # Input Fields
 trip_name = st.text_input("Trip Name")
 distance = st.number_input("Distance (in km)", min_value=0.0)
-mileage = st.number_input("Car Mileage (km/l)", min_value=1.0)
-fuel_price = st.number_input("Fuel Price per Litre (₹)", value=110.0)
-toll_cost = st.number_input("Toll Cost (₹)", value=500.0)
-no_of_days = st.number_input("Number of Days", min_value=1)
-stay_cost_per_day = st.number_input("Stay Cost per Day (₹)", value=1000.0)
+mileage = st.number_input("Car Mileage (km/l)", min_value=18.0)
+fuel_price = st.number_input("Fuel Price per Litre (₹)", value=104)
+toll_cost_per_km = st.number_input("Toll Cost per Kilometer(₹)", value=3.0)
+stay_cost_per_day = st.number_input("Stay Cost per Day (₹)", value=500.0)
+food_cost_once = st.number_input("Cost of 1 Meal(₹)", value=200.0)
+chai_pani_cost = st.number_input("Misc Cost like Tea / Water(₹)", value=100.0)
 
-# Calculations
-fuel_required = distance / mileage
-fuel_cost = fuel_required * fuel_price
-stay_cost = stay_cost_per_day * no_of_days
-total_cost = fuel_cost + toll_cost + stay_cost
+if distance > 0:
+    days_estimated = math.ceil(distance / 400)
+else:
+    days_estimated = 1  # Default
+
+# 🔹 Estimated and Editable Days
+estimated_days = math.ceil(distance / 400) if distance > 0 else 1
+days_used = st.number_input("Number of Days (estimated, but editable)", min_value=1, value=estimated_days)
+
+# 🔹 Calculations with math.ceil
+fuel_required = math.ceil(distance / mileage) if mileage > 0 else 0
+fuel_cost = math.ceil(fuel_required * fuel_price)
+toll_cost = math.ceil(toll_cost_per_km * distance)
+stay_cost = math.ceil(stay_cost_per_day * days_used)
+food_cost = math.ceil(((food_cost_once * 2) + chai_pani_cost) * days_used)
+
+total_cost = fuel_cost + toll_cost + stay_cost + food_cost
 
 # Output
 st.subheader("Trip Summary")
