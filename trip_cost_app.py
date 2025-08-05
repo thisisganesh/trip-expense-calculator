@@ -8,8 +8,8 @@ st.title("Trip Cost Calculator")
 
 # Input Fields
 trip_name = st.text_input("Trip Name")
-distance = st.number_input("Distance (in km)", min_value=0.0)
-mileage = st.number_input("Car Mileage (km/l)", min_value=18.0)
+distance = st.number_input("Distance (in km)", min_value=1.0)
+mileage = st.number_input("Car Mileage (km/l)", min_value=1.0)
 fuel_price = st.number_input("Fuel Price per Litre (₹)", value=104)
 toll_cost_per_km = st.number_input("Toll Cost per Kilometer(₹)", value=3.0)
 stay_cost_per_day = st.number_input("Stay Cost per Day (₹)", value=500.0)
