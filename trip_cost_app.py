@@ -15,6 +15,7 @@ toll_cost_per_km = st.number_input("Toll Cost per Kilometer(₹)", value=3.0)
 stay_cost_per_day = st.number_input("Stay Cost per Day (₹)", value=500.0)
 food_cost_once = st.number_input("Cost of 1 Meal(₹)", value=200.0)
 chai_pani_cost = st.number_input("Misc Cost like Tea / Water(₹)", value=100.0)
+no_of_pp = st.number_input("Count of Person(₹)", value=4)
 
 if distance > 0:
     days_estimated = math.ceil(distance / 400)
@@ -33,6 +34,7 @@ stay_cost = math.ceil(stay_cost_per_day * days_used)
 food_cost = math.ceil(((food_cost_once * 2) + chai_pani_cost) * days_used)
 
 total_cost = fuel_cost + toll_cost + stay_cost + food_cost
+total_cost_pp = (fuel_cost + toll_cost)/4  + stay_cost + food_cost
 
 # Output
 st.subheader("Trip Summary")
@@ -42,6 +44,7 @@ st.write(f"Fuel Cost: ₹ **{fuel_cost:.2f}**")
 st.write(f"Toll Cost: ₹ **{toll_cost:.2f}**")
 st.write(f"Stay Cost: ₹ **{stay_cost:.2f}**")
 st.write(f"**Total Cost: ₹ {total_cost:.2f}**")
+st.write(f"**Per Person Cost: ₹ {total_cost_pp:.2f}**")
 
 
 # Create a summary DataFrame
