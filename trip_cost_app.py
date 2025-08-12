@@ -34,7 +34,7 @@ stay_cost = math.ceil(stay_cost_per_day * days_used)
 food_cost = math.ceil(((food_cost_once * 2) + chai_pani_cost) * days_used)
 
 total_cost = fuel_cost + toll_cost + stay_cost + food_cost
-total_cost_pp = (fuel_cost + toll_cost)/4  + stay_cost + food_cost
+total_cost_pp = (fuel_cost + toll_cost)/no_of_pp  + stay_cost + food_cost
 
 # Output
 st.subheader("Trip Summary")
